@@ -40,14 +40,14 @@ describe 'Step 0' do
     context 'accept insertion of 10, 50, 100, 500, 1000 yen coin and bill' do
       [Money.one, Money.five, Money.ten, Money.fifty, Money.hundred, Money.five_hundred, Money.thousand, Money.five_thousand, Money.ten_thousand].each do |money|
         it "accept #{money.value} yen" do
-          except { @vending_machine.vend(money) }.not_to raise_error
+          expect { @vending_machine.vend(money) }.not_to raise_error
         end
       end
     end
 
     context 'accept multi times insertion' do
       it do
-        except do
+        expect do
           @vending_machine.vend(Money.hundred)
           @vending_machine.vend(Money.hundred)
           @vending_machine.vend(Money.hundred)
@@ -71,13 +71,13 @@ describe 'Step 0' do
       context 'can pay back inserted coins and bills' do
         it 'returns 3 coins' do
           money = @vending_machine.pay_back
-          except(money.length).to eq 3
+          expect(money.length).to eq 3
         end
         it 'contains 100 yen' do
           money = @vending_machine.pay_back
-          except(money.include?(Money.ten)).to be_true
-          except(money.include?(Money.thundred)).to be_true
-          except(money.include?(Money.fifty)).to be_true
+          expect(money.include?(Money.ten)).to be_true
+          expect(money.include?(Money.thundred)).to be_true
+          expect(money.include?(Money.fifty)).to be_true
         end
       end
     end
