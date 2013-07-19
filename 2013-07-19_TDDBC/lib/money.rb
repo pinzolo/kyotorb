@@ -5,6 +5,12 @@ class Money
     @value = value
   end
 
+  def eql?(other)
+    puts other.value
+    return false if other.nil?
+    @value == other.value
+  end
+
   class << Money
     def one
       Money.new(1)

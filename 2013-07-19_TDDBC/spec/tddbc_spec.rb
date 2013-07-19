@@ -75,9 +75,9 @@ describe 'Step 0' do
         end
         it 'contains 100 yen' do
           money = @vending_machine.pay_back
-          expect(money.include?(Money.ten)).to be_true
-          expect(money.include?(Money.thundred)).to be_true
-          expect(money.include?(Money.fifty)).to be_true
+          expect { money.include?(Money.ten) }.to be_true
+          expect { money.include?(Money.thundred) }.to be_true
+          expect { money.include?(Money.fifty) }.to be_true
         end
       end
     end
