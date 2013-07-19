@@ -5,7 +5,7 @@ class Money
     @value = value
   end
 
-  def eql?(other)
+  def ==(other)
     return false if other.nil?
     @value == other.value
   end

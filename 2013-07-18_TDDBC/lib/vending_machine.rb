@@ -1,8 +1,17 @@
 # coding: utf-8
+require 'money'
 class VendingMachine
+
+  ACCEPTABLE_MONEY = [Money.ten, Money.fifty, Money.hundred, Money.five_hundred, Money.thousand]
+
   def vend(money)
     @inserted_money ||= []
-    @inserted_money << money unless money.nil?
+    if ACCEPTABLE_MONEY.include?(money)
+      @inserted_money << money
+      nil
+    else
+      money
+    end
   end
 
   def amount

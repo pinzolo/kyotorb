@@ -79,3 +79,25 @@ describe 'Step 0' do
     end
   end
 end
+
+describe 'Step 1' do
+  describe VendingMachine do
+    before(:each) do
+      @vending_machine = VendingMachine.new
+    end
+
+    context 'when inserted invalid money' do
+      it 'returns inserted money' do
+        back = @vending_machine.vend(Money.one)
+        expect(back.value).to be Money.one.value
+      end
+    end
+
+    context 'when inserted valid money' do
+      it 'returns nothing' do
+        back = @vending_machine.vend(Money.ten)
+        expect(back).to be_nil
+      end
+    end
+  end
+end
