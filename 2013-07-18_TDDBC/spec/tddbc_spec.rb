@@ -4,7 +4,7 @@ require 'money'
 require 'juice'
 require 'juice_brand'
 
-describe 'Step 0' do
+describe 'Step 0:' do
   describe Money do
     it '#one returns 1yen' do
       expect(Money.one.value).to eq 1
@@ -82,20 +82,20 @@ describe 'Step 0' do
   end
 end
 
-describe 'Step 1' do
+describe 'Step 1:' do
   describe VendingMachine do
     before(:each) do
       @vending_machine = VendingMachine.new
     end
 
-    context 'when inserted invalid money' do
+    context 'when inserted invalid money,' do
       it 'returns inserted money' do
         back = @vending_machine.vend(Money.one)
         expect(back.value).to be Money.one.value
       end
     end
 
-    context 'when inserted valid money' do
+    context 'when inserted valid money,' do
       it 'returns nothing' do
         back = @vending_machine.vend(Money.ten)
         expect(back).to be_nil
@@ -122,12 +122,12 @@ describe 'Step 1' do
   end
 end
 
-describe 'Step 2' do
+describe 'Step 2:' do
   before(:each) do
     @vending_machine = VendingMachine.new
   end
 
-  context 'when vending machine initialized' do
+  context 'when vending machine initialized,' do
     it "has 1 juice brand" do
       expect(@vending_machine.stocks.length).to eq 1
     end
@@ -154,12 +154,12 @@ describe 'Step 2' do
   end
 end
 
-describe 'Step 3' do
+describe 'Step 3:' do
   before(:each) do
     @vending_machine = VendingMachine.new
   end
 
-  context 'when inserted 110yen' do
+  context 'when inserted 110yen,' do
     it 'get #can_sell?(coke) is false' do
       @vending_machine.vend(Money.hundred)
       @vending_machine.vend(Money.ten)
@@ -168,18 +168,18 @@ describe 'Step 3' do
     end
   end
 
-  context 'when inserted 150yen' do
+  context 'when inserted 150yen,' do
     before(:each) do
       @vending_machine.vend(Money.hundred)
       @vending_machine.vend(Money.fifty)
     end
 
-    context 'when stock count is 1' do
+    context 'when stock count is 1,' do
       before(:each) do
         @vending_machine.stocks.first.count = 1
       end
 
-      it 'get #can_sell?(coke) is true' do
+      it '#can_sell?(coke) returns true' do
         can_sell = @vending_machine.can_sell?(JuiceBrand::COKE)
         expect(can_sell).to be_true
       end
@@ -195,12 +195,12 @@ describe 'Step 3' do
       end
     end
 
-    context 'when stock count is 0' do
+    context 'when stock count is 0,' do
       before(:each) do
         @vending_machine.stocks.first.count = 0
       end
 
-      it 'get #can_sell?(coke) is false' do
+      it '#can_sell?(coke) returns false' do
         can_sell = @vending_machine.can_sell?(JuiceBrand::COKE)
         expect(can_sell).to be_false
       end
