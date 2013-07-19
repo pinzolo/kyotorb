@@ -69,11 +69,12 @@ describe 'Step 0' do
       end
 
       context 'can pay back inserted coins and bills' do
-        money = @vending_machine.pay_back
         it 'returns 3 coins' do
+          money = @vending_machine.pay_back
           except(money.length).to eq 3
         end
         it 'contains 100 yen' do
+          money = @vending_machine.pay_back
           except(money.include?(Money.ten)).to be_true
           except(money.include?(Money.thundred)).to be_true
           except(money.include?(Money.fifty)).to be_true
