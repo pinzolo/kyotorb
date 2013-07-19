@@ -69,15 +69,11 @@ describe 'Step 0' do
       end
 
       context 'can pay back inserted coins and bills' do
-        it 'returns 3 coins' do
-          money = @vending_machine.pay_back
-          expect(money.length).to eq 3
-        end
-        it 'contains 100 yen' do
-          money = @vending_machine.pay_back
-          expect { money.include?(Money.ten) }.to be_true
-          expect { money.include?(Money.thundred) }.to be_true
-          expect { money.include?(Money.fifty) }.to be_true
+        it 'returns 160 yen' do
+          sum = @vending_machine.pay_back.inject(0) do |result, item|
+            result += item.value
+          end
+          expect(sum).to be 160
         end
       end
     end
