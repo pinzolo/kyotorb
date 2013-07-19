@@ -38,7 +38,7 @@ describe 'Step 0' do
     end
 
     context 'accept insertion of 10, 50, 100, 500, 1000 yen coin and bill' do
-      [Money.one, Money.five, Money.ten, Money.fifty, Money.hundred, Money.five_hundred, Money.thousand, Money.five_thousand, Moeny.ten_thousand].each do |money|
+      [Money.one, Money.five, Money.ten, Money.fifty, Money.hundred, Money.five_hundred, Money.thousand, Money.five_thousand, Money.ten_thousand].each do |money|
         it "accept #{money.value} yen" do
           except { @vending_machine.vend(money) }.not_to raise_error
         end
