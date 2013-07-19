@@ -54,6 +54,19 @@ class VendingMachine
     stock ? stock.get : nil
   end
 
+  def add_stock(brand, count)
+    stock = find_stock(brand)
+    if stock
+      stock.count += count
+    else
+      @stocks << JuiceStock.new(brand, count)
+    end
+  end
+
+  def buyable_juices
+    @stocks.select { |stock| stock.count > 0 && amount >= stock.juice_price }.map(&:brand)
+  end
+
   private
   def find_stock(brand)
     @stocks.find { |s| s.brand == brand }

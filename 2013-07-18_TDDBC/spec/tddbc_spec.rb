@@ -212,3 +212,34 @@ describe 'Step 3:' do
     end
   end
 end
+
+describe 'Step 4:' do
+  before(:each) do
+    @vending_machine = VendingMachine.new
+  end
+
+  context 'when add other juice,' do
+    it "#add_stock don't raise error" do
+      expect { @vending_machine.add_stock(JuiceBrand::RED_BULL, 5) }.not_to raise_error
+    end
+
+    it "#add_stock increase stock brands" do
+      @vending_machine.add_stock(JuiceBrand::RED_BULL, 5)
+      @vending_machine.add_stock(JuiceBrand::WATER, 5)
+      expect(@vending_machine.stocks.length).to eq 3
+    end
+  end
+
+  context "when juice added," do
+    it "#buyable_juices show buyable juice list" do
+      @vending_machine.stocks.first.count = 0
+      @vending_machine.add_stock(JuiceBrand::RED_BULL, 5)
+      @vending_machine.add_stock(JuiceBrand::WATER, 5)
+      @vending_machine.vend(Money.hundred)
+      @vending_machine.vend(Money.fifty)
+      juices = @vending_machine.buyable_juices
+      expect(juices.length).to eq 1
+      expect(juices.first).to eq JuiceBrand::WATER
+    end
+  end
+end
