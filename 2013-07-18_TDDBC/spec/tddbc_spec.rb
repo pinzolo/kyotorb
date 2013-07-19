@@ -197,7 +197,7 @@ describe 'Step 3' do
 
     context 'when stock count is 0' do
       before(:each) do
-        @vending_machine.stocks.first.count = 1
+        @vending_machine.stocks.first.count = 0
       end
 
       it 'get #can_sell?(coke) is false' do
