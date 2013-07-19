@@ -8,6 +8,7 @@ class JuiceStock
   end
 
   def get
+    count > 0 ? Juice.new(brand) : nil
   end
 
   def juice_name

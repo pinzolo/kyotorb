@@ -1,6 +1,8 @@
 # coding: utf-8
 require 'vending_machine'
 require 'money'
+require 'juice'
+require 'juice_brand'
 
 describe 'Step 0' do
   describe Money do
@@ -148,6 +150,65 @@ describe 'Step 2' do
 
     it "can get stocked juice count" do
       expect { @vending_machine.stocks.first.count }.not_to raise_error
+    end
+  end
+end
+
+describe 'Step 3' do
+  before(:each) do
+    @vending_machine = VendingMachine.new
+  end
+
+  context 'when inserted 110yen' do
+    it 'get #can_sell?(coke) is false' do
+      @vending_machine.vend(Money.hundred)
+      @vending_machine.vend(Money.ten)
+      can_sell = @vending_machine.can_sell?(JuiceBrand::COKE)
+      expect(can_sell).to be_false
+    end
+  end
+
+  context 'when inserted 150yen' do
+    before(:each) do
+      @vending_machine.vend(Money.hundred)
+      @vending_machine.vend(Money.fifty)
+    end
+
+    context 'when stock count is 1' do
+      before(:each) do
+        @vending_machine.stocks.first.count = 1
+      end
+
+      it 'get #can_sell?(coke) is true' do
+        can_sell = @vending_machine.can_sell?(JuiceBrand::COKE)
+        expect(can_sell).to be_true
+      end
+
+      it '#sell returns 1 juice' do
+        juice = @vending_machine.sell(JuiceBrand::COKE)
+        expect(juice).to be_a_kind_of(Juice)
+      end
+
+      it '#sell returns 1 coke' do
+        juice = @vending_machine.sell(JuiceBrand::COKE)
+        expect(juice.brand).to eq JuiceBrand::COKE
+      end
+    end
+
+    context 'when stock count is 0' do
+      before(:each) do
+        @vending_machine.stocks.first.count = 0
+      end
+
+      it 'get #can_sell?(coke) is false' do
+        can_sell = @vending_machine.can_sell?(JuiceBrand::COKE)
+        expect(can_sell).to be_false
+      end
+
+      it '#sell returns nothing' do
+        juice = @vending_machine.sell(JuiceBrand::COKE)
+        expect(juice).to be_nil
+      end
     end
   end
 end
