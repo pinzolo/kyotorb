@@ -1,5 +1,6 @@
 # coding: utf-8
 require 'vending_machine'
+require 'money'
 
 describe 'Step 0' do
   describe Money do
