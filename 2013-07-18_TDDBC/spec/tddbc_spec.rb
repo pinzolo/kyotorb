@@ -139,15 +139,15 @@ describe 'Step 2' do
     end
 
     it "can get stocked juice price" do
-      expect(@vending_machine.stocks.first.price).not_to raise_error
+      expect { @vending_machine.stocks.first.juice_price }.not_to raise_error
     end
 
     it "can get stocked juice name" do
-      expect(@vending_machine.stocks.first.name).not_to raise_error
+      expect { @vending_machine.stocks.first.juice_name }.not_to raise_error
     end
 
     it "can get stocked juice count" do
-      expect(@vending_machine.stocks.first.count).not_to raise_error
+      expect { @vending_machine.stocks.first.count }.not_to raise_error
     end
   end
 end
