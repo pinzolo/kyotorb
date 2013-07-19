@@ -99,5 +99,23 @@ describe 'Step 1' do
         expect(back).to be_nil
       end
     end
+
+    context 'valid money are 10, 50, 100, 500, 1000 yen' do
+      [Money.ten, Money.fifty, Money.hundred, Money.five_hundred, Money.thousand].each do |m|
+        it "returns nothing, when #{m.value} yen insterted" do
+          back = @vending_machine.vend(m)
+          expect(back).to be_nil
+        end
+      end
+    end
+
+    context 'invalid money are 1, 5, 5000, 10000 yen' do
+      [Money.one, Money.five, Money.five_thousand, Money.ten_thousand].each do |m|
+        it "returns inserted money(#{m.value} yen)" do
+          back = @vending_machine.vend(m)
+          expect(back.value).to be m.value
+        end
+      end
+    end
   end
 end
