@@ -39,4 +39,23 @@ class VendingMachine
     @inserted_money = []
     back_money
   end
+
+  def can_sell?(brand)
+    stock = find_stock(brand)
+    return false unless stock
+
+    stock.count > 0 && amount >= brand.price
+  end
+
+  def sell(brand)
+    return nil unless can_sell?(brand)
+
+    stock = find_stock(brand)
+    stock ? stock.get : nil
+  end
+
+  private
+  def find_stock(brand)
+    @stocks.find { |s| s.brand == brand }
+  end
 end
