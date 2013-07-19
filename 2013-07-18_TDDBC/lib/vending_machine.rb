@@ -1,6 +1,15 @@
 # coding: utf-8
 require 'money'
+require 'juice_brand'
+require 'juice_stock'
+
 class VendingMachine
+  attr_accessor :stocks
+
+  def initialize
+    @stocks = []
+    @stocks << JuiceStock.new(JuiceBrand::COKE, 5)
+  end
 
   ACCEPTABLE_MONEY = [Money.ten, Money.fifty, Money.hundred, Money.five_hundred, Money.thousand]
 
