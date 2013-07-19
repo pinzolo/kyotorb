@@ -119,3 +119,35 @@ describe 'Step 1' do
     end
   end
 end
+
+describe 'Step 2' do
+  before(:each) do
+    @vending_machine = VendingMachine.new
+  end
+
+  context 'when vending machine initialized' do
+    it "has 1 juice brand" do
+      expect(@vending_machine.stocks.length).to eq 1
+    end
+
+    it "stock juice has 5 stocks" do
+      expect(@vending_machine.stocks.first.count).to eq 5
+    end
+
+    it "stocked juice brand is coke" do
+      expect(@vending_machine.stocks.first.juice_name).to eq "coke"
+    end
+
+    it "can get stocked juice price" do
+      expect { @vending_machine.stocks.first.juice_price }.not_to raise_error
+    end
+
+    it "can get stocked juice name" do
+      expect { @vending_machine.stocks.first.juice_name }.not_to raise_error
+    end
+
+    it "can get stocked juice count" do
+      expect { @vending_machine.stocks.first.count }.not_to raise_error
+    end
+  end
+end
